@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="hienthi"></div>
+
+    <script>
+        let arr = ["Giày", "Dép" , "Quần", "Áo"];
+        let thanhphan = "<input id=\"themsanpham\" type=\"text\" /> <button onclick=\"themSP()\">Them san pham</button> </br></br></br></br>\n" +
+            "    <input id=\"xoasanpham\" type=\"text\" /> <button onclick=\"xoaSP()\">Xoa san pham</button> </br></br></br></br>\n" +
+            "    <p>Ten sai : <input id=\"tensai\" type=\"text\" /> Ten Dung : <input id=\"tendung\" type=\"text\" />\n" +
+            "    <button onclick=\"suaTen()\">Sua ten</button>";
+        let table = "<table border='2px' cellspacing='0' cellpadding='5'>";
+        let hienthi;
+
+        function danhsach() {
+           for (let i = 1; i <= arr.length; i++) {
+               table += "<tr>" + "<td>" +i +"</td>" + "<td>" + arr[i-1] +"</td>" + "</tr>"
+           }
+           table += "</table> " + "</br>"
+           console.log(table)
+            hienthi = table + thanhphan;
+            document.getElementById("hienthi").innerHTML = hienthi;
+        }
+
+        function themSP() {
+
+            let sanPhamThem = document.getElementById("themsanpham").value;
+            arr.push(sanPhamThem);
+            loading();
+            danhsach();
+            document.getElementById("themsanpham").value = "";
+            alert("San pham da duoc them")
+        }
+
+        function xoaSP() {
+            let sanPhamXoa = document.getElementById("xoasanpham").value;
+            if (arr.indexOf(sanPhamXoa) != -1) {
+                arr.splice(arr.indexOf(sanPhamXoa), 1);
+                alert("San pham da duoc xoa");
+            } else {
+                alert("Khong thay san pham");
+            }
+            loading();
+            danhsach();
+            document.getElementById("xoasanpham").value = "";
+        }
+
+        function suaTen() {
+            let tenTruoc = document.getElementById("tensai").value;
+            let tenSau = document.getElementById("tendung").value;
+            if (arr.indexOf(tenTruoc) != -1) {
+                arr[arr.indexOf(tenTruoc)] = tenSau;
+                alert("San pham da duoc sua")
+            } else {
+                alert("Khong thay san pham")
+            }
+            loading();
+            danhsach();
+            document.getElementById("tensai").value = "";
+            document.getElementById("tendung").value = "";
+        }
+
+        function loading() {
+            table = "<table border='2px' cellspacing='0' cellpadding='5'>";
+            document.getElementById("hienthi").innerHTML = "";
+        }
+
+    window.onload = danhsach();
+    </script>
+</body>
+</html>
